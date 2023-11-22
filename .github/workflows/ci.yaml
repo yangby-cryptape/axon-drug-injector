@@ -1,0 +1,71 @@
+name: CI
+on:
+  push:
+    branches: [ master, develop ]
+  pull_request:
+    branches: [ master ]
+  merge_group:
+defaults:
+  run:
+    shell: bash
+env:
+  CARGO_TERM_COLOR: always
+  RUSTFLAGS: -D warnings
+  RUST_BACKTRACE: full
+jobs:
+  rustfmt:
+    name: Checks / Format
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          toolchain: 1.74.0
+          components: rustfmt
+      - name: Run
+        run: cargo fmt --all -- --check
+  clippy:
+    name: Checks / Clippy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          toolchain: 1.74.0
+          components: clippy
+      - name: Run
+        run: cargo clippy --workspace --locked
+  unit-tests:
+    name: Tests / Unit Tests
+    needs: [ rustfmt, clippy ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          toolchain: 1.74.0
+      - name: Install cargo-nextest
+        uses: taiki-e/install-action@v2
+        with:
+          tool: nextest
+      - name: Unit Tests
+        run: cargo nextest run --workspace --no-fail-fast --hide-progress-bar --failure-output final
+  build:
+    name: Build
+    needs: [ unit-tests ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          toolchain: 1.74.0
+      - name: Build
+        run: cargo build --workspace --verbose
