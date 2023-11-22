@@ -1,0 +1,11 @@
+[package]
+name = "axon-drug-injector"
+version = "0.1.0-alpha.0"
+authors = ["Boyu Yang <yangby@cryptape.com>"]
+edition = "2021"
+license = "MIT"
+description = "Connect to an Axon network and inject messages, even malicious."
+homepage = "https://github.com/yangby-cryptape/axon-drug-injector"
+repository = "https://github.com/yangby-cryptape/axon-drug-injector"
+
+[dependencies]
