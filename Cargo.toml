@@ -4,8 +4,33 @@ version = "0.1.0-alpha.0"
 authors = ["Boyu Yang <yangby@cryptape.com>"]
 edition = "2021"
 license = "MIT"
-description = "Connect to an Axon network and inject messages, even malicious."
+description = "Connect to an Axon network through P2P protocols and inject messages, even malicious."
 homepage = "https://github.com/yangby-cryptape/axon-drug-injector"
 repository = "https://github.com/yangby-cryptape/axon-drug-injector"
 
 [dependencies]
+anyhow = "1.0"
+thiserror = "1.0"
+log = "0.4"
+env_logger = "0.10"
+clap = { version = "4.4", features = ["derive"] }
+serde = { version = "1.0", features = ["derive"] }
+toml = "0.8"
+
+tokio = { version = "1.34", features = [] }
+async-trait = "0.1"
+
+jsonrpsee = { version = "0.20", features = ["macros", "server"] }
+tower = "0.4"
+tower-http = { version = "0.4", features = ["cors"] }
+hyper = "0.14"
+
+tentacle = { version = "0.5.0-alpha.1", features = ["parking_lot", "secio-async-trait"] }
+socket2 = "0.4"
+
+rand = "0.8"
+faketime = "0.2"
+
+axon-protocol             = { rev = "6a574cd", package = "axon-protocol",        git = "https://github.com/axonweb3/axon" }
+axon-common-config-parser = { rev = "6a574cd", package = "common-config-parser", git = "https://github.com/axonweb3/axon" }
+axon-core-network         = { rev = "6a574cd", package = "core-network",         git = "https://github.com/axonweb3/axon" }

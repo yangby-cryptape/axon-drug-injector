@@ -1,0 +1,22 @@
+# The chain ID of the Axon network you want to connect.
+chain_id = 0x41786f6e
+
+# Directory to store all data.
+# Currently only network data are stored.
+data_dir = "data"
+
+[network]
+# A 32 bits binary file, which will be used as the private key in P2P network.
+keyfile = "network.key"
+listening_address = "/ip4/0.0.0.0/tcp/8801"
+
+# A list of bootnodes.
+# At least one bootnode should be provided, so that to connect to its Axon network.
+[[network.bootstraps]]
+multi_address = "/ip4/192.168.1.2/tcp/8801/p2p/QmNk6bBwkLPuqnsrtxpp819XLZY3ymgjs3p1nKtxBVgqxj"
+
+[jsonrpc]
+listening_address = "127.0.0.1:8800"
+max_request_body_size = 67_108_864  # 64 MiB
+max_response_body_size = 67_108_864 # 64 MiB
+max_connections = 10
