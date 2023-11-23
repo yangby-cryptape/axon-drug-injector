@@ -59,6 +59,11 @@ Drug Injector for [Axon], which can connect to an [Axon] network through P2P pro
 [`config-template.toml`]: etc/config-template.toml
 [`max_gas_cap`]: https://github.com/axonweb3/axon/blob/6a574cdbe0b0f826968602d253721606f2cd5ded/devtools/chain/config.toml#L18
 
+## Examples
+
+- [An example, written in TypeScript](examples/transfer.ts),
+  to inject the simplest transfer transaction into an Axon network.
+
 ## License
 
 Licensed under [MIT License][MIT].
